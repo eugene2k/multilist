@@ -238,33 +238,7 @@ impl<T> std::default::Default for List<T> {
         List::new()
     }
 }
-/*
-struct MultiList<T, const LISTS: usize> {
-    buffer: InnerVec<MaybeFree<ListItem<T>, Index>>,
-    last_free: Index,
-    heads: [Index; LISTS],
-    tail: Index,
-}
-impl<T, const LISTS: usize> MultiList<T, LISTS> {
-    fn new() -> Self {
-        MultiList {
-            buffer: InnerVec::new(),
-            last_free: Index::new_invalid(),
-            heads: [Index::new_invalid(); LISTS],
-            tail: Index::new_invalid(),
-        }
-    }
-    fn push_back(&mut self, list: usize, item: T) {
-        // FIXME: what if the separator_head is invalid?
-    }
-    fn remove(&mut self, list: usize, index: Index) {
-        if list > 0 && self.heads[list - 1] == index {
-            self.heads[list - 1] = Index::new_invalid();
-        }
-        self.list.remove(index);
-    }
-}
-*/
+
 #[derive(Clone, Copy)]
 struct ListPointers {
     head: Index,
@@ -291,6 +265,8 @@ impl<T, const S: usize> MultiList<T, S> {
             lists: [ListPointers::new_invalid(); S],
         }
     }
+    /// # Safety
+    /// Result is undefined if index is equal to or exceeds the number of lists
     pub unsafe fn head_unchecked(&self, index: usize) -> Index {
         self.lists.get_unchecked(index).head
     }
