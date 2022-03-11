@@ -1,5 +1,5 @@
 [package]
-name = "vec-list"
+name = "multilist"
 version = "0.1.0"
 authors = ["Eugene Gorodinsky <1811946+eugene2k@users.noreply.github.com>"]
 edition = "2018"
