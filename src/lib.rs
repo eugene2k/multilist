@@ -1,5 +1,4 @@
 #![feature(untagged_unions)]
-#![feature(const_generics)]
 
 use std::mem::ManuallyDrop;
 
